@@ -52,13 +52,13 @@ static void polling_thread_function(){
         
         if(bytes < 0) {
             logger::info("Lost contact with joystick");
-            drone::set_ctrller_connected_flag(false);
+            // drone::set_ctrller_connected_flag(false);
             fd = -1;
             while(fd < 0){
                 fd = open("/dev/input/js0", O_RDONLY);
                 usleep(10000);
             }
-            drone::set_ctrller_connected_flag(true);
+            // drone::set_ctrller_connected_flag(true);
             logger:info("Restablished contact with joystick.");
         }
 
