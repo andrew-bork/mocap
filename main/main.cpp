@@ -226,7 +226,7 @@ void message_thread_funct(){
 
 
         std::string report = reporter::get_json_report();
-        if(unix_connection.send(report.c_str(), report.length())) < 0){
+        if(unix_connection.send(report.c_str(), report.length()) < 0){
             reconnect_node_server(client, unix_connection);
         }
 
