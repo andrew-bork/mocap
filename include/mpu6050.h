@@ -184,4 +184,37 @@ namespace gyro_range {
 	void print_debug();
 
 	void destroy();
+
+
+	struct mpu6050 {
+		int fd;
+		int raw_data[6];
+		double data[6];
+
+		mpu6050();
+		mpu6050(int addr);
+
+		void wake_up();
+		void sleep();
+
+		void set_pwr_set(int set);
+		void set_accl_set(accl_range::accl_range set);
+		void set_gyro_set(gyro_range::gyro_range set);
+		void set_clk(clk::clk set);
+		void set_dlpf_bandwidth(dlpf::dlpf set);
+		void set_fsync(fsync::fsync set);
+
+		void read_raw();
+
+		void read();
+		
+		int query_register(int reg);
+		void set_register(int reg, int data);
+
+		void calibrate(int n);
+
+		void print_debug();
+		void destroy();
+	};
+
 };
