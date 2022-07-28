@@ -5,6 +5,7 @@
 #include <logger.h>
 #include <math.h>
 #include <string>
+#include <filter.h>
 
 enum state {
     configuring = 0, ready = 1, calibrating = 2, idle = 3, init = 4, settling = 5, destroying = 6
@@ -12,7 +13,7 @@ enum state {
 
 math::quarternion orientation;
 math::vector orientation_euler;
-
+math::vector position, velocity;
 
 double mpu6050_data[6];
 double filtered_mpu6050_data[6];
@@ -20,9 +21,13 @@ double mpu6050_filters[6];
 
 double dt;
 
+int settle_length = 200;
+int sensor_sleep_int, message_sleep_int;
 
-int sensor_sleep_int;
-state curr_state;
+std::string socket_path;
+
+bool alive = true, zero_flag = false, calib_flag = false;
+state curr_state = state::ready;
 
 void config(){
 
@@ -119,12 +124,6 @@ void sensor_thread_funct(){
 
         if(zero_flag){
             orientation = math::quarternion(1, 0, 0, 0);
-
-            velocity = math::vector(0, 0, 0);
-            position = math::vector(0, 0, 0);
-            initial_altitude = old_altitude = bmp390_data[2];
-            valt = 0;
-
             logger::info("Zeroed");
             zero_flag = false;
         }
@@ -168,12 +167,12 @@ void message_thread_funct(){
         reporter::bind_dbl("vroll", filtered_mpu6050_data + 3); // 3
         reporter::bind_dbl("vpitch", filtered_mpu6050_data + 4); // 4
         reporter::bind_dbl("vyaw", filtered_mpu6050_data + 5); // 5
-        reporter::bind_dbl("vx", &velocity.x); // 6
-        reporter::bind_dbl("vy", &velocity.y); // 7
-        reporter::bind_dbl("vz", &velocity.z); // 8
-        reporter::bind_dbl("x", &position.x); // 9
-        reporter::bind_dbl("y", &position.y); // 10
-        reporter::bind_dbl("z", &position.z); // 11
+        // reporter::bind_dbl("vx", &velocity.x); // 6
+        // reporter::bind_dbl("vy", &velocity.y); // 7
+        // reporter::bind_dbl("vz", &velocity.z); // 8
+        // reporter::bind_dbl("x", &position.x); // 9
+        // reporter::bind_dbl("y", &position.y); // 10
+        // reporter::bind_dbl("z", &position.z); // 11
         reporter::bind_dbl("roll", &orientation_euler.x); // 12
         reporter::bind_dbl("pitch", &orientation_euler.y); // 13
         reporter::bind_dbl("yaw", &orientation_euler.z); // 14
