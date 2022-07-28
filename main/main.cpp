@@ -6,6 +6,12 @@
 #include <math.h>
 #include <string>
 #include <filter.h>
+#include <chrono>
+#include <cmath>
+#include <config.h>
+#include <thread>
+
+#include <cstdlib>
 
 enum state {
     configuring = 0, ready = 1, calibrating = 2, idle = 3, init = 4, settling = 5, destroying = 6
@@ -21,15 +27,69 @@ double mpu6050_filters[6];
 
 double dt;
 
+double upper_sensor_freq_cutoff;
+double sensor_g_tolerance;
+double sensor_g_tolerance_sqrd;
+double sensor_roll_pitch_tau;
+
 int settle_length = 200;
 int sensor_sleep_int, message_sleep_int;
+int sensor_ref_rate, message_thread_ref_rate;
 
 std::string socket_path;
 
 bool alive = true, zero_flag = false, calib_flag = false;
 state curr_state = state::ready;
 
+void setup_filters(){
+    for(int i = 0; i < 3; i ++){
+        mpu6050_filters[i] = filter::low_pass(sensor_ref_rate, upper_sensor_freq_cutoff);
+    }
+    for(int i = 3; i < 6; i ++){
+        mpu6050_filters[i] = filter::none();
+    }
+
+    mpu6050_filters[5] = filter::low_pass(sensor_ref_rate, upper_sensor_freq_cutoff);
+}
+
+
 void config(){
+    config::load_file();
+    
+    sensor_ref_rate = config::get_config_int("sensor.ref_rate", 60);
+    upper_sensor_freq_cutoff = config::get_config_dbl("sensor.mpu6050.upper_freq_cutoff", 5);
+    // lower_sensor_freq_cutoff = config::get_config_dbl("sensor.mpu6050.lower_freq_cutoff", 0.01);
+    settle_length = config::get_config_int("sensor.settle_length", 200);
+    sensor_roll_pitch_tau = config::get_config_dbl("sensor.roll_pitch_tau", 0.02);
+    sensor_g_tolerance = config::get_config_dbl("sensor.g_tolerance", 0.1);
+
+    message_thread_ref_rate = config::get_config_int("message.ref_rate", 10);
+    socket_path = config::get_config_str("message.socket_path", "./run/msg.socket");
+
+    // upper_vz_freq_cutoff = config::get_config_dbl("sensor.vertical_v.upper_freq_cutoff", 2);
+    // upper_pressure_freq_cutoff = config::get_config_dbl("sensor.pressure.upper_freq_cutoff", 5);
+    // sensor_z_tau = config::get_config_dbl("sensor.z_tau", 0.02);
+
+    config::write_to_file();
+
+    // load_pid_config();
+    
+    sensor_sleep_int = 1000000 / sensor_ref_rate;
+    message_sleep_int = 1000000 / message_thread_ref_rate;
+    sensor_g_tolerance_sqrd = sensor_g_tolerance * sensor_g_tolerance;
+
+    logger::lconfig("Settle Length: {}", settle_length);
+    logger::lconfig("Sensor Refresh Rate: {}hz", sensor_ref_rate);
+    logger::lconfig("Message Refresh Rate: {}hz", message_thread_ref_rate);
+    logger::lconfig("Socket Location: {}", socket_path);
+    logger::lconfig("Sensor G Tolerance: {}", sensor_g_tolerance);
+    logger::lconfig("Sensor Roll Pitch Tau: {}", sensor_roll_pitch_tau);
+    // logger::lconfig("Sensor Z Tau: {}", sensor_z_tau);
+    logger::lconfig("Upper Accelerometer Frequency Cutoff: {}", upper_sensor_freq_cutoff);
+    // logger::lconfig("Upper Pressure Frequency Cutoff: {}", upper_pressure_freq_cutoff);
+    // logger::lconfig("Upper Vz Frequency Cutoff: {}", upper_vz_freq_cutoff);
+
+    setup_filters();
 
 }
 
@@ -235,11 +295,20 @@ void message_thread_funct(){
 }
 
 
-
+void exit_handle(){
+    alive = false;
+}
 
 int main(){
+    std::atexit(exit_handle);
+    config();
+    std::thread sensor_thread = std::thread(sensor_thread_funct);
+    std::thread message_thread = std::thread(message_thread_funct);
 
+    while(alive){usleep(10000);}
 
+    sensor_thread.join();
+    message_thread.join();
     
-
+    return 0;
 }
