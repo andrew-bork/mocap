@@ -23,7 +23,7 @@ math::vector position, velocity;
 
 double mpu6050_data[6];
 double filtered_mpu6050_data[6];
-double mpu6050_filters[6];
+filter::filter mpu6050_filters[6];
 
 double dt;
 
@@ -53,7 +53,7 @@ void setup_filters(){
 }
 
 
-void config(){
+void load_config(){
     config::load_file();
     
     sensor_ref_rate = config::get_config_int("sensor.ref_rate", 60);
@@ -301,7 +301,7 @@ void exit_handle(){
 
 int main(){
     std::atexit(exit_handle);
-    config();
+    load_config();
     std::thread sensor_thread = std::thread(sensor_thread_funct);
     std::thread message_thread = std::thread(message_thread_funct);
 
