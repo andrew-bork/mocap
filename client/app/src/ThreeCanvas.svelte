@@ -1,6 +1,8 @@
 <script>
     import { Scene, BoxGeometry,  MeshStandardMaterial, Mesh, WebGLRenderer, PerspectiveCamera, DirectionalLight, Vector3, Euler } from 'three';
     import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+
 
     export let rotation;
     
@@ -11,9 +13,13 @@
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
-    const geometry = new BoxGeometry(1, 1, 1);
-    const material = new MeshStandardMaterial({color: 0x00FF00 });
-    const cube = new Mesh(geometry, material);
+    const loader = new GLTFLoader();
+    let kunai;
+    loader.load("models/damaged kunai.glb", (gltf) => {
+        // scene.add(gltf.scene);
+        kunai = gltf.scene;
+        scene.add(kunai);
+    })
 
     const sun = new DirectionalLight(0xFFFFFF, 0.8);
     sun.position.set(2.0,2.0,3.0);
@@ -24,7 +30,6 @@
     back.lookAt(0,0,0);
 
     scene.add(sun);
-    scene.add(cube);
     scene.add(back);
 
     camera.position.z = 5;
@@ -33,7 +38,9 @@
 
     controls.enableDamping = true;
 
-    $: cube.setRotationFromEuler(new Euler(rotation.pitch, rotation.yaw, rotation.roll, "YXZ"));
+    $: if(kunai) {
+        kunai.setRotationFromEuler(new Euler(rotation.pitch, rotation.yaw, rotation.roll, "YXZ"));
+    }
 
     function animate() {
         controls.update();
