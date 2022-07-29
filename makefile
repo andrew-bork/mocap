@@ -9,7 +9,7 @@ OBJDIR:=build
 OBJ_FILES := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 
 LIBS := ${wildcard ./lib/lib*.a}
-CMD_LIBS := $(patsubst ./lib/lib%.a,-l%, ${LIBS})
+CMD_LIBS := $(patsubst ./lib/lib%.a,-l%, ${LIBS}) -lfmt
 
 OPTS:= -Iinclude -pthread -lpthread -L../lib -li2c -std=c++2a -Wno-psabi -L./lib ${CMD_LIBS}
 
