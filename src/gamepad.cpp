@@ -8,7 +8,7 @@
 #include <iostream>
 #include <logger.h>
 
-#include <drone.h>
+// #include <drone.h>
 
 #define JS_EVENT_BUTTON         0x01    /* button pressed/released */
 #define JS_EVENT_AXIS           0x02    /* joystick moved */
