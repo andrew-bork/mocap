@@ -9,7 +9,6 @@
 #define FMT_XCHAR_H_
 
 #include <cwchar>
-#include <tuple>
 
 #include "format.h"
 
@@ -80,6 +79,16 @@ auto vformat(basic_string_view<Char> format_str,
   basic_memory_buffer<Char> buffer;
   detail::vformat_to(buffer, format_str, args);
   return to_string(buffer);
+}
+
+#if !FMT_GCC_VERSION || FMT_GCC_VERSION >= 409
+template <typename... Args>
+using wformat_string = basic_format_string<wchar_t, type_identity_t<Args>...>;
+#endif
+
+template <typename... T>
+auto format(wformat_string<T...> fmt, T&&... args) -> std::wstring {
+  return vformat(fmt, fmt::make_wformat_args(args...));
 }
 
 // Pass char_t as a default template parameter instead of using

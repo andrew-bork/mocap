@@ -118,20 +118,6 @@ FMT_END_NAMESPACE
 #  endif
 #endif
 
-#ifndef FMT_DEPRECATED
-#  if FMT_HAS_CPP14_ATTRIBUTE(deprecated) || FMT_MSC_VERSION >= 1900
-#    define FMT_DEPRECATED [[deprecated]]
-#  else
-#    if (defined(__GNUC__) && !defined(__LCC__)) || defined(__clang__)
-#      define FMT_DEPRECATED __attribute__((deprecated))
-#    elif FMT_MSC_VERSION
-#      define FMT_DEPRECATED __declspec(deprecated)
-#    else
-#      define FMT_DEPRECATED /* deprecated */
-#    endif
-#  endif
-#endif
-
 #ifndef FMT_USE_USER_DEFINED_LITERALS
 // EDG based compilers (Intel, NVIDIA, Elbrus, etc), GCC and MSVC support UDLs.
 #  if (FMT_HAS_FEATURE(cxx_user_literals) || FMT_GCC_VERSION >= 407 || \
@@ -301,7 +287,8 @@ FMT_CONSTEXPR20 auto bit_cast(const From& from) -> To {
   if (is_constant_evaluated()) return std::bit_cast<To>(from);
 #endif
   auto to = To();
-  std::memcpy(&to, &from, sizeof(to));
+  // The cast suppresses a bogus -Wclass-memaccess on GCC.
+  std::memcpy(static_cast<void*>(&to), &from, sizeof(to));
   return to;
 }
 
@@ -380,10 +367,12 @@ class uint128_fallback {
   }
   FMT_CONSTEXPR auto operator>>(int shift) const -> uint128_fallback {
     if (shift == 64) return {0, hi_};
+    if (shift > 64) return uint128_fallback(0, hi_) >> (shift - 64);
     return {hi_ >> shift, (hi_ << (64 - shift)) | (lo_ >> shift)};
   }
   FMT_CONSTEXPR auto operator<<(int shift) const -> uint128_fallback {
     if (shift == 64) return {lo_, 0};
+    if (shift > 64) return uint128_fallback(lo_, 0) << (shift - 64);
     return {hi_ << shift | (lo_ >> (64 - shift)), (lo_ << shift)};
   }
   FMT_CONSTEXPR auto operator>>=(int shift) -> uint128_fallback& {
@@ -403,11 +392,11 @@ class uint128_fallback {
       hi_ += (lo_ < n ? 1 : 0);
       return *this;
     }
-#if FMT_HAS_BUILTIN(__builtin_addcll)
+#if FMT_HAS_BUILTIN(__builtin_addcll) && !defined(__ibmxl__)
     unsigned long long carry;
     lo_ = __builtin_addcll(lo_, n, 0, &carry);
     hi_ += carry;
-#elif FMT_HAS_BUILTIN(__builtin_ia32_addcarryx_u64)
+#elif FMT_HAS_BUILTIN(__builtin_ia32_addcarryx_u64) && !defined(__ibmxl__)
     unsigned long long result;
     auto carry = __builtin_ia32_addcarryx_u64(0, lo_, n, &result);
     lo_ = result;
@@ -933,8 +922,11 @@ struct is_contiguous<basic_memory_buffer<T, SIZE, Allocator>> : std::true_type {
 };
 
 namespace detail {
+#ifdef _WIN32
+FMT_API bool write_console(std::FILE* f, string_view text);
+#endif
 FMT_API void print(std::FILE*, string_view);
-}
+}  // namespace detail
 
 /** A formatting error such as invalid format string. */
 FMT_CLASS_API
@@ -1288,8 +1280,6 @@ template <> struct float_info<float> {
   static const int small_divisor = 10;
   static const int min_k = -31;
   static const int max_k = 46;
-  static const int divisibility_check_by_5_threshold = 39;
-  static const int case_fc_pm_half_lower_threshold = -1;
   static const int shorter_interval_tie_lower_threshold = -35;
   static const int shorter_interval_tie_upper_threshold = -35;
 };
@@ -1302,8 +1292,6 @@ template <> struct float_info<double> {
   static const int small_divisor = 100;
   static const int min_k = -292;
   static const int max_k = 326;
-  static const int divisibility_check_by_5_threshold = 86;
-  static const int case_fc_pm_half_lower_threshold = -2;
   static const int shorter_interval_tie_lower_threshold = -77;
   static const int shorter_interval_tie_upper_threshold = -77;
 };
@@ -1530,7 +1518,7 @@ template <typename T = void> struct basic_data {
       10000000000000000000ULL};
 };
 
-#if __cplusplus < 201703L
+#if FMT_CPLUSPLUS < 201703L
 template <typename T> constexpr uint64_t basic_data<T>::pow10_significands[];
 template <typename T> constexpr int16_t basic_data<T>::pow10_exponents[];
 template <typename T> constexpr uint64_t basic_data<T>::power_of_10_64[];
@@ -3005,7 +2993,7 @@ FMT_CONSTEXPR20 inline void format_dragon(basic_fp<uint128_t> value,
       upper = &upper_store;
     }
   }
-  bool even = (value.f & 1) == 0;
+  int even = static_cast<int>((value.f & 1) == 0);
   if (!upper) upper = &lower;
   if ((flags & dragon::fixup) != 0) {
     if (add_compare(numerator, *upper, denominator) + even <= 0) {
