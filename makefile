@@ -1,30 +1,16 @@
 CC:=arm-linux-gnueabihf-gcc
 CXX:=arm-linux-gnueabihf-g++
+AR:=arm-linux-gnueabihf-ar
 
-SRCS:=${wildcard src/*.cpp}
-SRCDIR:=src
+.PHONY: libs
 
-INCLUDEDIR:=include
+libs: i2c fmt
 
-OBJDIR:=build
-OBJ_FILES := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+i2c: 3rdParty/lib/libi2c.a
+	make -C 3rdParty/i2c-tools/
+	cp 3rdParty/i2c-tools/lib/libi2c.a 3rdParty/lib/libi2c.a
 
-LIBS := ${wildcard ./3rdParty/lib/lib*.a}
-CMD_LIBS := $(patsubst ./3rdParty/lib/lib%.a,-l%, ${LIBS})
-
-OPTS:= -Iinclude -pthread -std=c++2a -Wno-psabi -L./3rdParty/lib ${CMD_LIBS} 
-
-.PHONY: default
-
-default: ${OBJ_FILES}
-	if not exist bin mkdir bin
-	${CXX} $^ main/main.cpp -o bin/mocap ${OPTS}
-
-
-${OBJDIR}/%.o: ${SRCDIR}/%.cpp
-	if not exist build mkdir build
-	g++ $^ -c -o $@ ${OPTS}
-
-%: ${OBJ_FILES} tools/%.cpp
-	if not exist bin mkdir bin
-	${CXX} ${OBJ_FILES} $^ -o bin/$@ ${OPTS}
+fmt: 3rdParty/lib/libfmt.a
+	cmake -DCMAKE_CXX_COMPILER=${CXX} -DCMAKE_C_COMPILER=%{CC} -S 3rdParty/lib/fmt -B 3rdParty/lib/fmt/build
+	${MAKE} -C 3rdParty/lib/fmt/build
+	cp 3rdParty/lib/fmt/build/libfmt.a 3rdParty/lib/libfmt.a
