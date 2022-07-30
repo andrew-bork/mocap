@@ -4,7 +4,9 @@ CXX:=arm-linux-gnueabihf-g++
 SRCS:=${wildcard src/*.cpp}
 SRCDIR:=src
 
-INCLUDEDIR:=include
+INCLUDEDIR:=include ../3rdParty/fmt/include ../3rdParty/i2c-tools/include
+
+INCLUDEFLAG:=${patsubst %,-I%, ${INCLUDEDIR}}
 
 OBJDIR:=build
 OBJ_FILES := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
@@ -12,7 +14,7 @@ OBJ_FILES := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
 LIBS := ${wildcard ./3rdParty/lib/lib*.a}
 CMD_LIBS := $(patsubst ./3rdParty/lib/lib%.a,-l%, ${LIBS})
 
-OPTS:= -Iinclude -pthread -std=c++2a -Wno-psabi -L./3rdParty/lib ${CMD_LIBS} 
+OPTS:= ${INCLUDEFLAG} -posix -lpthread -pthread -std=c++2a -Wno-psabi -L./3rdParty/lib ${CMD_LIBS} -D _GLIBCXX_USE_PTHREAD_MUTEX_CLOCKLOCK
 
 .PHONY: default
 
@@ -27,4 +29,8 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.cpp
 
 %: ${OBJ_FILES} tools/%.cpp
 	if not exist bin mkdir bin
-	${CXX} ${OBJ_FILES} $^ -o bin/$@ ${OPTS}
+	${CXX} ${OBJ_FILES} $^ -o bin/$@ -H ${OPTS}
+
+test:
+	if not exist bin mkdir bin
+	${CXX} tools/test.cpp -o bin/test -H ${OPTS}

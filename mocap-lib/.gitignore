@@ -1,0 +1,8 @@
+bin/
+3rdParty/
+.vscode/
+build/
+config/
+pipes/
+*.json
+*/node_modules/

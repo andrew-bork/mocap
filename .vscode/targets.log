@@ -1,0 +1,382 @@
+make.exe all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.82
+# Built for i686-pc-mingw32
+# Copyright (C) 2010  Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+ 
+
+# Make data base, printed on Fri Jul 29 17:19:15 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+# default
+.SHELLFLAGS := -c
+# environment
+PROVIDE_FULLSTACK_ACTION = true
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+CUDA_PATH_V11_5 = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# makefile (from `makefile', line 15)
+OPTS := -Iinclude -pthread -std=c++2a -Wno-psabi -L./3rdParty/lib -li2c -lfmt 
+# automatic
+@D =  
+$(patsubst %/,%,$(dir $@))
+# environment
+HOMEDRIVE = C:
+# automatic
+@F = $(notdir $@)
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# makefile
+CURDIR := c:/Users/Andrew/Documents/VSCode/mocap
+# default
+SHELL := sh.exe
+# environment
+WINDIR = C:\Windows
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+ONEDRIVE = C:\Users\Andrew\OneDrive
+# environment
+WALLABY_PRODUCTION = true
+# environment
+PATHEXT = .SCM;.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.PY;.PYW
+# makefile (from `makefile', line 1)
+MAKEFILE_LIST :=  makefile
+# environment
+TMP = C:\Users\Andrew\AppData\Local\Temp
+# environment
+PROGRAMW6432 = C:\Program Files
+# environment
+PROGRAMDATA = C:\ProgramData
+# environment
+VSCODE_CWD = C:\Users\Andrew\AppData\Local\Programs\Microsoft VS Code
+# makefile (from `makefile', line 10)
+OBJ_FILES := 
+# environment
+PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Python310\Scripts\;C:\Python310\;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\libnvvp;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Andrew\AppData\Local\Microsoft\WindowsApps;C:\Users\Andrew\AppData\Local\Programs\Microsoft VS Code\bin;C:\Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\Program Files\LLVM\bin;C:\Program Files\NVIDIA Corporation\Nsight Compute 2021.3.0\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Users\Andrew\miniconda3;C:\Users\Andrew\miniconda3\Library\mingw-w64\bin;C:\Users\Andrew\miniconda3\Library\usr\bin;C:\Users\Andrew\miniconda3\Library\bin;C:\Users\Andrew\miniconda3\Scripts;C:\Users\Andrew\AppData\Local\Microsoft\WindowsApps;C:\Users\Andrew\AppData\Local\Programs\Microsoft VS Code\bin;C:\ffmpeg\bin;C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools;C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\\MSBuild\Current\Bin;C:\freesw\bin\;C:\Users\Andrew\Downloads\opencv\build\x64\vc15\bin;C:\Users\Andrew\Documents\VSCode\audio-shit\build\src\Release;C:\Users\Andrew\Documents\VSCode\audio-shit\build\src\Release;C:\Users\Andrew\AppData\Roaming\npm;C:\freesw\fluidsynth;C:\freesw\fluidsynth\bin;C:\freesw\fluidsynth\include;C:\freesw\fluidsynth\lib;C:\Program Files (x86)\LilyPond\usr\bin;C:\Program Files (x86)\LilyPond\usr\etc;C:\Program Files (x86)\LilyPond\usr\lib;C:\Program Files (x86)\LilyPond\usr\share;C:\Program Files (x86)\LilyPond\usr\var;C:\mingw\bin;;C:\SysGCC\raspberry\bin
+# environment
+COMMONPROGRAMW6432 = C:\Program Files\Common Files
+# environment
+GOLANG_EXECUTABLE = go
+# environment
+CHOCOLATEYLASTPATHUPDATE = 132797574631925425
+# environment
+PROCESSOR_ARCHITECTURE = x86
+# environment
+THREE_SCALE_USER_TOKEN = 207c527cfc2a6b8dcf4fa43ad7a976da
+# environment
+USERPROFILE = C:\Users\Andrew
+# environment
+CHOCOLATEYINSTALL = C:\ProgramData\chocolatey
+# environment
+ALLUSERSPROFILE = C:\ProgramData
+# environment
+NUMBER_OF_PROCESSORS = 12
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine archives
+# environment
+UUID = 2c3c50f1-5101-4e44-aa8d-28fa8b66625e
+# environment
+NVTOOLSEXT_PATH = C:\Program Files\NVIDIA Corporation\NvToolsExt\
+# makefile (from `makefile', line 5)
+SRCDIR := src
+# automatic
+%F = $(notdir $%)
+# environment
+CHROME_CRASHPAD_PIPE_NAME = \\.\pipe\crashpad_39032_YYKLCZHSCZAWORTF
+# makefile (from `makefile', line 13)
+CMD_LIBS := -li2c -lfmt
+# environment
+COMPUTERNAME = MATHBOX
+# environment
+PROGRAMFILES = C:\Program Files (x86)
+# environment
+DRIVERDATA = C:\Windows\System32\Drivers\DriverData
+# environment
+NVCUDASAMPLES_ROOT = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v11.5
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+USERNAME = Andrew
+# environment
+PUBLIC = C:\Users\Public
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+VSCODE_CODE_CACHE_PATH = C:\Users\Andrew\AppData\Roaming\Code\CachedData\3b889b090b5ad5793f524b5d1d39fda662b96a2a
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+COMMONPROGRAMFILES = C:\Program Files (x86)\Common Files
+# environment
+LOGONSERVER = \\MATHBOX
+# environment
+TELEMETRY_ID = 5eb07633-b1e1-4d3b-987d-ee86e7a5632d
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# environment
+USERDOMAIN = MATHBOX
+# environment
+MIC_LD_LIBRARY_PATH = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\compiler\lib\mic
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
+# makefile (from `makefile', line 4)
+SRCS := 
+# makefile (from `makefile', line 1)
+CC := arm-linux-gnueabihf-gcc
+# default
+MAKE_VERSION := 3.82
+# makefile
+.DEFAULT_GOAL := default
+# environment
+PROGRAMFILES(X86) = C:\Program Files (x86)
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+LOCALAPPDATA = C:\Users\Andrew\AppData\Local
+# environment
+PSMODULEPATH = C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+# default
+MAKE_COMMAND := make.exe
+# environment
+UTM_SOURCE = vscode
+# environment
+NVCUDASAMPLES11_5_ROOT = C:\ProgramData\NVIDIA Corporation\CUDA Samples\v11.5
+# environment
+PROCESSOR_ARCHITEW6432 = AMD64
+# environment
+AMDRMSDKPATH = C:\Program Files\AMD\RyzenMasterSDK\
+# default
+.VARIABLES := 
+# automatic
+*F = $(notdir $*)
+# environment
+PROCESSOR_IDENTIFIER = AMD64 Family 25 Model 33 Stepping 0, AuthenticAMD
+# environment
+OS = Windows_NT
+# environment
+VSCODE_IPC_HOOK = \\.\pipe\6d9d2e64fd29004ee2f3bbf642b87f23-1.69.2-main-sock
+# environment
+HOMEPATH = \Users\Andrew
+# environment
+COMMONPROGRAMFILES(X86) = C:\Program Files (x86)\Common Files
+# environment
+PROMPT = $P$G
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+INTEL_DEV_REDIST = C:\Program Files (x86)\Common Files\Intel\Shared Libraries\
+# environment
+SYSTEMROOT = C:\Windows
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+RECOMMENDER_API_URL = https://gw.api.openshift.io//api/v2
+# automatic
++F = $(notdir $+)
+# environment
+APPDATA = C:\Users\Andrew\AppData\Roaming
+# environment
+TEMP = C:\Users\Andrew\AppData\Local\Temp
+# environment
+COMSPEC = C:\Windows\system32\cmd.exe
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# makefile (from `makefile', line 9)
+OBJDIR := build
+# makefile (from `makefile', line 2)
+CXX := arm-linux-gnueabihf-g++
+# environment
+LC_ALL = C
+# makefile (from `makefile', line 7)
+INCLUDEDIR := include
+# makefile (from `makefile', line 12)
+LIBS := ./3rdParty/lib/libi2c.a ./3rdParty/lib/libfmt.a
+# automatic
+^F = $(notdir $^)
+# environment
+CUDA_PATH = C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5
+# default
+SUFFIXES := 
+# environment
+SYSTEMDRIVE = C:
+# environment
+SESSIONNAME = Console
+# environment
+PROCESSOR_REVISION = 2100
+# environment
+VBOX_HWVIRTEX_IGNORE_SVM_IN_USE = 1
+# default
+.RECIPEPREFIX := 
+# environment
+LANG = C
+# environment
+PROCESSOR_LEVEL = 25
+# environment
+VSCODE_PID = 39032
+# environment
+USERDOMAIN_ROAMINGPROFILE = MATHBOX
+# variable set hash-table stats:
+# Load=112/1024=11%, Rehash=0, Collisions=14/139=10%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# \Program Files (x86)\LilyPond\usr\share;C: could not be stat'd.
+# \Program Files (x86)\NVIDIA Corporation\PhysX\Common;C: could not be stat'd.
+# \freesw\fluidsynth\include;C: could not be stat'd.
+# \Program Files\Git\cmd;C: could not be stat'd.
+# \Python310\;C: could not be stat'd.
+# ./3rdParty/lib (key c:/Users/Andrew/Documents/VSCode/mocap/3rdParty/lib, mtime 1659135353): 4 files, no impossibilities.
+# \Program Files (x86)\Razer Chroma SDK\bin;C: could not be stat'd.
+# \Program Files\Razer\ChromaBroadcast\bin;C: could not be stat'd.
+# \Python310\Scripts\;C: could not be stat'd.
+# \Windows\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps;C: could not be stat'd.
+# . (key c:/Users/Andrew/Documents/VSCode/mocap, mtime 1659135824): 16 files, no impossibilities.
+# \Program Files (x86)\Microsoft Visual Studio\2019\BuildTools;C: could not be stat'd.
+# \Program Files (x86)\LilyPond\usr\lib;C: could not be stat'd.
+# \Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C: could not be stat'd.
+# \Windows;C: could not be stat'd.
+# \ProgramData\chocolatey\bin;C: could not be stat'd.
+# \Program Files\LLVM\bin;C: could not be stat'd.
+# \Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\libnvvp;C: could not be stat'd.
+# C: could not be stat'd.
+# \freesw\fluidsynth;C: could not be stat'd.
+# \Users\Andrew\Documents\VSCode\audio-shit\build\src\Release;C: could not be stat'd.
+# \Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\\MSBuild\Current\Bin;C: could not be stat'd.
+# \Users\Andrew\AppData\Roaming\npm;C: could not be stat'd.
+# \Windows\System32\Wbem;C: could not be stat'd.
+# \Program Files (x86)\LilyPond\usr\var;C: could not be stat'd.
+# \mingw\bin;;C: could not be stat'd.
+# \Users\Andrew\AppData\Local\Microsoft\WindowsApps;C: could not be stat'd.
+# \Users\Andrew\Downloads\opencv\build\x64\vc15\bin;C: could not be stat'd.
+# src: could not be stat'd.
+# \SysGCC\raspberry\bin (key c:/SysGCC/raspberry/bin, mtime 1659118211): 39 files, no impossibilities.
+# \Program Files\NVIDIA Corporation\Nsight Compute 2021.3.0\;C: could not be stat'd.
+# \Program Files (x86)\Razer\ChromaBroadcast\bin;C: could not be stat'd.
+# \freesw\bin\;C: could not be stat'd.
+# \Program Files\nodejs\;C: could not be stat'd.
+# \Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.5\bin;C: could not be stat'd.
+# \Users\Andrew\AppData\Local\Programs\Micr 
+osoft VS Code\bin;C: could not be stat'd.
+# \Users\Andrew\miniconda3\Library\usr\bin;C: could not be stat'd.
+# \Program Files\Razer Chroma SDK\bin;C: could not be stat'd.
+# \Windows\System32\OpenSSH\;C: could not be stat'd.
+# \Users\Andrew\miniconda3;C: could not be stat'd.
+# \Users\Andrew\miniconda3\Library\bin;C: could not be stat'd.
+# \Users\Andrew\miniconda3\Scripts;C: could not be stat'd.
+# \freesw\fluidsynth\bin;C: could not be stat'd.
+# \Windows\system32;C: could not be stat'd.
+# \Program Files\CMake\bin;C: could not be stat'd.
+# \Users\Andrew\miniconda3\Library\mingw-w64\bin;C: could not be stat'd.
+# tools (key (null), mtime 0): No files, 2 impossibilities.
+# \Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C: could not be stat'd.
+# \Windows\System32\WindowsPowerShell\v1.0\;C: could not be stat'd.
+# \Program Files (x86)\LilyPond\usr\etc;C: could not be stat'd.
+# \Program Files (x86)\Common Files\Oracle\Java\javapath;C: could not be stat'd.
+# \freesw\fluidsynth\lib;C: could not be stat'd.
+# \ffmpeg\bin;C: could not be stat'd.
+# \Program Files (x86)\LilyPond\usr\bin;C: could not be stat'd.
+# \Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C: could not be stat'd.
+
+# 59 files, 2 impossibilities in 55 directories.
+
+# Implicit Rules
+
+build/%.o: src/%.cpp
+#  recipe to execute (from `makefile', line 25):
+	if not exist build mkdir build
+	g++ $^ -c -o $@ ${OPTS}
+
+%: tools/%.cpp
+#  recipe to execute (from `makefile', line 29):
+	if not exist bin mkdir bin
+	${CXX} ${OBJ_FILES} $^ -o bin/$@ ${OPTS}
+
+# 2 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+.PHONY: default
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-29 16:01:00
+#  File has been updated.
+#  Successfully updated.
+
+default:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from `makefile', line 20):
+	if not exist bin mkdir bin
+	${CXX} $^ main/main.cpp -o bin/mocap ${OPTS}
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/22=0%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 0 / lookups = 134 / hits = 134
+# # of strcache buffers: 1 (* 8176 B/buffer = 8176 B)
+# strcache used: total = 0 (3343) / max = 0 / min = 8176 / avg = 0
+# strcache free: total = 0 (4833) / max = 0 / min = 8176 / avg = 0
+
+# strcache hash-table stats:
+# Load=122/8192=1%, Rehash=0, Collisions=4/134=3%
+# Finished Make data base on Fri Jul 29 17:19:15 2022
+
+ 
+make.exe: *** No rule to make target `all'.  Stop.
+

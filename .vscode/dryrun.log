@@ -1,0 +1,7 @@
+make.exe --dry-run --keep-going --print-directory
+make.exe: Entering directory `c:/Users/Andrew/Documents/VSCode/mocap'
+if not exist bin mkdir bin
+ 
+arm-linux-gnueabihf-g++  main/main.cpp -o bin/mocap -Iinclude -pthread -std=c++2a -Wno-psabi -L./3rdParty/lib -li2c -lfmt 
+make.exe: Leaving directory `c:/Users/Andrew/Documents/VSCode/mocap'
+ 

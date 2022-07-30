@@ -1,6 +1,7 @@
 #include <filter.h>
 #include <cmath>
 
+#define M_PI 3.141592
 #define sqrt2 1.41421356237 
 double filter::filter::operator[] (double x0){
     double y0 = b0 * x0 + b1 * x1 + b2 * x2 + a1 * y1 + a2 * y2;

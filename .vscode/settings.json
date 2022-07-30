@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "fstream": "cpp",
+        "xlocmes": "cpp",
+        "cmath": "cpp",
+        "cstdio": "cpp"
+    }
+}
