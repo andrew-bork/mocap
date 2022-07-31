@@ -4,7 +4,7 @@ CXX:=arm-linux-gnueabihf-g++
 SRCS:=${wildcard src/*.cpp}
 SRCDIR:=src
 
-INCLUDEDIR:=include ../3rdParty/fmt/include ../3rdParty/libi2c/include
+INCLUDEDIR:=include ../3rdParty/fmt/include ../3rdParty/i2c-tools/include
 
 INCLUDEFLAG:=${patsubst %,-I%, ${INCLUDEDIR}}
 
